@@ -1,1 +1,146 @@
-<p>hello</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{  
+          padding:0;  
+          width:450px;  
+          margin:10% auto auto auto;  
+          background-color:#fff;  
+        }  
+        #quote{  
+          padding:40px 50px;  
+          text-align:center;  
+        }  
+        #author{  
+          text-align:right;  
+          padding-right:50px;  
+          padding-bottom:12px;  
+        }  
+        .button{  
+          padding:6px;  
+          color:white;  
+          margin:0px 50px;  
+          margin-bottom:25px;  
+          background-color:#333;  
+          border:none;  
+          display:inline-block;  
+          border-radius:4px;  
+            
+        }  
+        .button1{  
+          margin-left:40px;  
+          padding:8px 12px;  
+        }  
+  
+        .button2{  
+          font-size:16px;  
+          float:right;  
+        }  
+  
+        footer{  
+          text-align:center;  
+          color:white;  
+          margin-top:2%;  
+        }  
+  
+        body{  
+          color:red;  
+        }
+    </style>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div id="box">  
+          <div id="quote">  
+            <i class="fa fa-quote-left"></i>  
+            <span id="quote-text"></span>  
+          </div>  
+          <div id="author">  
+            - <span id="author-text">我就是作者</span>  
+          </div>  
+          <div id="buttons">  
+            <button class="button button1">  
+              <i class="fa fa-tumblr"></i>  
+            </button>  
+            <button class="button button2" id="newquote">新的名言</button>  
+          </div>  
+        </div>  
+        <footer>by natural_live</footer>
+        <script>
+            var text=document.getElementById("quote-text");  
+    var author=document.getElementById("author-text");  
+    var newquote=document.getElementById("newquote");  
+    var button1=document.getElementsByClassName("button1");//获取第一个button，通过类名。  
+    var text1="";  
+    var author1="";  
+      
+    var colors=['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857"];//定义了一组颜色  
+  
+    var json1 = [//定义了一个json数组  
+      {  
+      "text":"真理惟一可靠的标准就是永远自相符合。",  
+      "author":"欧文",  
+      },  
+     {  
+      "text":"时间是一切财富中最宝贵的财富。",  
+      "author":"德奥弗拉斯多",  
+     },  
+     {  
+      "text":"这世界要是没有爱情，它在我们心中还会有什么意义！这就如一盏没有亮光的走马灯。",  
+      "author":"歌德"  
+     }  
+    ];  
+      
+  
+    window.onload=function(){//加载窗口触发事件  
+      getnewquote();  
+    }  
+      
+    newquote.onclick=getnewquote;//将button的onclick事件绑定一个函数  
+      
+  
+    function getnewquote(){//获取一句新的名言  
+      var num=randomNum(0,colors.length);//获取随机的颜色  
+      var num1=randomNum(0,json1.length);//获取随机的一句名言  
+      var color=colors[num];  
+      //改变body的背景色与元素的颜色  
+      document.body.style.backgroundColor=color;  
+      document.body.style.color=color;  
+      //改变名言的颜色  
+      document.getElementById("quote").style.color=color;  
+      //改变新的名言的背景色  
+      newquote.style.backgroundColor=color;  
+        
+      //改变第一个button的背景色  
+      button1[0].style.backgroundColor=color;  
+          
+    //将名言与作者更新成新的名言与作者  
+      text.innerHTML=json1[num1].text;  
+      author.innerHTML=json1[num1].author;  
+      text1=json1[num1].text;  
+      author1=json1[num1].author;  
+      console.log(text1);  
+    }  
+    button1[0].onclick=openUrl;  
+      
+    function openUrl(){//打开一个链接  
+        var url='https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent('"' + text1 + '" ' + author1);  
+        window.open(url, 'Share', 'width=550, height=400, toolbar=0, scrollbars=1 ,location=0 ,statusbar=0,menubar=0, resizable=0');  
+    }  
+  
+    function randomNum(min,max){//获取一个在（min，max）之间的随机数  
+        return min+Math.floor(Math.random()*(max-min));  
+    }
+        </script>
+</body>
+</html>
